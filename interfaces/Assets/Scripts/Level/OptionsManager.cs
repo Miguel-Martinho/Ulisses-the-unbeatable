@@ -25,8 +25,8 @@ public class OptionsManager : MonoBehaviour
         {
             LifeEvent.OnSubmit += HealthChange;
             EnemyEvent.OnSubmit += EnemyChange;
-            LifeEventS.OnSubmit += HealthChange;
-            EnemyEventS.OnSubmit += EnemyChange;
+            //LifeEventS.OnSubmit += HealthChange;
+            //EnemyEventS.OnSubmit += EnemyChange;
 
             Destroy(gameObject);
             return;
