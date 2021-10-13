@@ -20,8 +20,16 @@ public class SwitchInput : MonoBehaviour
 
     private void PauseMenuActivate()
     {
+        Debug.Log("w");
         Time.timeScale = 0;
 
         pauseMenu.SetActive(true);
     }
+
+    public void PauseMenuDeactivate()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+    }
+
 }
