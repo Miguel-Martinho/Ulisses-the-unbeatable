@@ -11,7 +11,7 @@ public class StartLevel : MonoBehaviour
     private PlayerInput pI;
 
     private void Awake()
-    {
+    {       
         pI = FindObjectOfType<PlayerInput>();
         buttonInfo = GetComponent<ButtonInfo>();
 

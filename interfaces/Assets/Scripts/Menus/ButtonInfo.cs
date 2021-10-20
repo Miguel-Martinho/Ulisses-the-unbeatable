@@ -15,8 +15,7 @@ public class ButtonInfo : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         button = GetComponent<Button>();
-        iC = FindObjectOfType<MenuInputController>();
-
+        iC = FindObjectOfType<MenuInputController>();      
     }
 
     public void Selected()

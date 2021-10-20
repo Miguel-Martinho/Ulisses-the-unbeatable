@@ -22,7 +22,7 @@ public class EnemyActor : DamageActor
     private bool reachedPlayer;
     [SerializeField]
     private bool canAttack;
-
+    private bool isDead;
     private void Awake()
     {
         Health = baseHealth;
@@ -30,6 +30,9 @@ public class EnemyActor : DamageActor
         player = FindObjectOfType<PlayerMovement>();
         playerRb = player.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
+
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+        
 
         concreteAttackBuildup  = new WaitForSeconds(attackBuildup);
         concreteAttackCooldown = new WaitForSeconds(attackCooldown);
@@ -42,6 +45,8 @@ public class EnemyActor : DamageActor
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         Chase();
 
         if (reachedPlayer) Attack();
@@ -62,7 +67,7 @@ public class EnemyActor : DamageActor
         else
         {
             vel.x = player.WalkingVelocity;
-            rb.velocity = vel;
+            rb.velocity = vel;            
             reachedPlayer = true;
         }
     }
@@ -77,11 +82,14 @@ public class EnemyActor : DamageActor
 
     private void Death()
     {
+        //GetComponent<Collider2D>().enabled = false;
+        isDead = true;
+        GetComponent<Animator>().Play("die");
         //mudar depois
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
-    IEnumerator AttackCooldown()
+        IEnumerator AttackCooldown()
     {
         yield return concreteAttackBuildup;
 
