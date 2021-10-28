@@ -22,13 +22,6 @@ public class EnemyDifficultyHandler : MonoBehaviour
     private void Awake()
     {
         numberOfEnemies = GetComponentsInChildren<EnemyActor>(true);
-        //Collider2D playColl = 
-        //    GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
-
-        //foreach (EnemyActor a in numberOfEnemies)
-        //{
-        //    Physics2D.IgnoreCollision(a.gameObject.GetComponent<Collider2D>(), playColl);
-        //}
 
         OptionsManager.instance.OnEnemyChange += Modifier;
 
