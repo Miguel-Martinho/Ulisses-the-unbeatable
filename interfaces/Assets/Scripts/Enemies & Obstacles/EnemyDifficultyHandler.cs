@@ -14,11 +14,21 @@ public class EnemyDifficultyHandler : MonoBehaviour
     [SerializeField, Range(1, 30)]
     private int hard = 1;
 
+    [SerializeField]
     private EnemyActor[] numberOfEnemies;
+
+
 
     private void Awake()
     {
         numberOfEnemies = GetComponentsInChildren<EnemyActor>(true);
+        //Collider2D playColl = 
+        //    GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+
+        //foreach (EnemyActor a in numberOfEnemies)
+        //{
+        //    Physics2D.IgnoreCollision(a.gameObject.GetComponent<Collider2D>(), playColl);
+        //}
 
         OptionsManager.instance.OnEnemyChange += Modifier;
 
