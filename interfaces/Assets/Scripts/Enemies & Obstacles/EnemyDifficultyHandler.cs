@@ -33,7 +33,6 @@ public class EnemyDifficultyHandler : MonoBehaviour
 
     private void Modifier()
     {
-        print("here");
 
         int i = numberOfEnemies.Length - 1;
 

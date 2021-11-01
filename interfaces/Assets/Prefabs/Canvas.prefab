@@ -5264,6 +5264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2217060774304217384}
+  health: {fileID: 11400000, guid: fd53278c18438a744adcdb5d59a9a18a, type: 2}
+  maxHealth: {fileID: 11400000, guid: 5ef61b86545fbef469f96e8012474554, type: 2}
 --- !u!114 &2217060775240751818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5554,6 +5556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d83f5f5bbe422344bd06f57131b8628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   enemies: {fileID: 0}
   player: {fileID: 0}
 --- !u!1 &2217060775336961264
@@ -5567,6 +5570,7 @@ GameObject:
   - component: {fileID: 2217060775336961265}
   - component: {fileID: 2217060775336961279}
   - component: {fileID: 2217060775336961278}
+  - component: {fileID: 4778340383393706428}
   m_Layer: 5
   m_Name: LevelEnd
   m_TagString: Untagged
@@ -5643,6 +5647,22 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+--- !u!114 &4778340383393706428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217060775336961264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fde99de15f7f94288a2e1700b84e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: {fileID: 2217060774560832651}
+  enemies: {fileID: 2217060775653736340}
+  health: {fileID: 11400000, guid: fd53278c18438a744adcdb5d59a9a18a, type: 2}
+  maxHealth: {fileID: 11400000, guid: 5ef61b86545fbef469f96e8012474554, type: 2}
 --- !u!1 &2217060775357115723
 GameObject:
   m_ObjectHideFlags: 0

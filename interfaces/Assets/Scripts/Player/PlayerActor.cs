@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerActor : MonoBehaviour
 {
+
+    [SerializeField]
+    private ScriptableInt health, maxHealth;
     [SerializeField][Range(0, 20)]
     private int baseHealth;
     public int Health { get; private set; }
@@ -22,7 +25,9 @@ public class PlayerActor : MonoBehaviour
 
         Modifier();
 
-        HealthChange += Damage;
+        maxHealth.value = Health;
+        health.value = Health;
+        //HealthChange += Damage;
         Death += KillPlayer;
     }
 
@@ -71,8 +76,9 @@ public class PlayerActor : MonoBehaviour
         int dmg;
         dmg = collision.gameObject.GetComponentInParent<DamageActor>().Damage;
 
+        health.value -= dmg;
         StartCoroutine("InvulCountdown");
-        HealthChange?.Invoke(dmg);
+        HealthChange?.Invoke();
     }
 
     private IEnumerator InvulCountdown()
@@ -85,6 +91,6 @@ public class PlayerActor : MonoBehaviour
         invulnerable = false;
     }
 
-    public event Action<int> HealthChange;
+    public event Action      HealthChange;
     public event Action      Death;
 }
