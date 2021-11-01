@@ -20,7 +20,6 @@ public class ButtonOptionShow : MonoBehaviour
 
     private void Awake()
     {
-        print("test");
         text = GetComponent<TextMeshProUGUI>();
 
         OptionsManager.instance.OnHealthChange += Modifier;
