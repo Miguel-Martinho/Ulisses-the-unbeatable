@@ -19,8 +19,14 @@ public class OptionsManager : MonoBehaviour
     public Difficulty PlayerHealthBase  { get; private set; }
     public Difficulty EnemyAndObstacles { get; private set; }
 
+    [SerializeField]
+    private ScriptableInt vidaDificulty, enemyDificulty;
+
     private void Awake()
     {
+        PlayerHealthBase = (Difficulty)vidaDificulty.value;
+        EnemyAndObstacles = (Difficulty)enemyDificulty.value;
+
         if (instance != null)
         {
             LifeEvent.OnSubmit += HealthChange;
@@ -39,12 +45,13 @@ public class OptionsManager : MonoBehaviour
         //LifeEventS.OnSubmit += HealthChange;
         //EnemyEventS.OnSubmit += EnemyChange;
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void HealthChange()
     {
         print(PlayerHealthBase);
+       
 
         switch (PlayerHealthBase)
         {
@@ -59,12 +66,16 @@ public class OptionsManager : MonoBehaviour
                 break;
         }
 
+        vidaDificulty.value = (int)PlayerHealthBase;
+
         OnHealthChange?.Invoke();
     }
 
     private void EnemyChange()
     {
         print(EnemyAndObstacles);
+
+       
 
         switch (EnemyAndObstacles)
         {
@@ -78,6 +89,8 @@ public class OptionsManager : MonoBehaviour
                 EnemyAndObstacles = Difficulty.Easy;
                 break;
         }
+
+        enemyDificulty.value = (int)EnemyAndObstacles;
 
         OnEnemyChange?.Invoke();
     }
