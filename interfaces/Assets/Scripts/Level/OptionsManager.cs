@@ -50,7 +50,7 @@ public class OptionsManager : MonoBehaviour
 
     private void HealthChange()
     {
-        print(PlayerHealthBase);
+        //print(PlayerHealthBase);
        
 
         switch (PlayerHealthBase)
@@ -73,7 +73,7 @@ public class OptionsManager : MonoBehaviour
 
     private void EnemyChange()
     {
-        print(EnemyAndObstacles);
+        //print(EnemyAndObstacles);
 
        
 
