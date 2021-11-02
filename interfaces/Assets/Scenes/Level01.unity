@@ -21047,6 +21047,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7154802972249126991, guid: 88355daef86dc82418e4728a86557ffb, type: 3}
+      propertyPath: damageToDeal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7154802972268848612, guid: 88355daef86dc82418e4728a86557ffb, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.00000002614682

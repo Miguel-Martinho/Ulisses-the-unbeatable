@@ -47,6 +47,8 @@ public class EnemyActor : DamageActor
     {
         if (isDead) return;
 
+        gameObject.GetComponent<Animator>().SetTrigger("Running");
+
         Chase();
 
         if (reachedPlayer) Attack();
