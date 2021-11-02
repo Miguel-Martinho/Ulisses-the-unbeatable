@@ -33,7 +33,7 @@ public class PlayerActor : MonoBehaviour
 
     private void Update()
     {
-        if (Health <= 0)
+        if (health.value <= 0)
         {
             Death?.Invoke();
         }

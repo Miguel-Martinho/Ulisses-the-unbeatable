@@ -15953,6 +15953,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2217060774476359773, guid: 50269755392b3a44ab41811e4375a603, type: 3}
+      propertyPath: sceneToLoad
+      value: Level03
+      objectReference: {fileID: 0}
     - target: {fileID: 2217060774666438678, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1
