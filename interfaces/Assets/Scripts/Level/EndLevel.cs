@@ -20,13 +20,7 @@ public class EndLevel : MonoBehaviour
         pA.Death += DeathScreen;
     }
 
-    void OnTriggerEnter2D(Collider2D hit)
-    {
-        if (hit.gameObject.layer == 10)
-        {
-            EndScreen();
-        }
-    }
+  
 
     // Event that will activate a menu screen asking if the player wants to
     // continue to the next level, save, or exit.

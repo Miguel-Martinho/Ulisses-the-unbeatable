@@ -28364,6 +28364,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6853433008744357198, guid: 1c950c8ead77e5a4fad2d8cb4c142f9f, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 36961353}
+    - target: {fileID: 6853433008744357198, guid: 1c950c8ead77e5a4fad2d8cb4c142f9f, type: 3}
+      propertyPath: levelEnd
+      value: 
+      objectReference: {fileID: 182304035}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c950c8ead77e5a4fad2d8cb4c142f9f, type: 3}
 --- !u!1 &1568346315 stripped

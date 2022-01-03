@@ -61,8 +61,8 @@ public class GeneralDifficultyHandler : MonoBehaviour
     private void GenerateLevel()
     {
         GameObject endObject = Instantiate(endPREFAB, new Vector3(endPos, endYPos, endZPos), Quaternion.identity);
-        EndLevel end = endObject.GetComponent<EndLevel>();
-        end.init(gameOverPanel, endLevelPanel);
+        //EndLevel end = endObject.GetComponent<EndLevel>();
+        //end.init(gameOverPanel, endLevelPanel);
 
         //Randomly select First Obstacle Type From Possible Types
         
