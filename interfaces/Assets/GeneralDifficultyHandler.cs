@@ -175,7 +175,7 @@ public class GeneralDifficultyHandler : MonoBehaviour
                 else if (r == ObsType.Enemy) {
 
                     float enemyStartPos = initialPos - Random.Range(20,31);
-                    Vector3 enPos = new Vector3(enemyStartPos, newPos.y,newPos.z);
+                    Vector3 enPos = new Vector3(enemyStartPos, newPos.y, GetEnemyZPos());
                     float t = (-initialPos + newPos.x) / playerSpeed;
                     float speed = (-enemyStartPos + newPos.x) / t;
 
@@ -194,6 +194,13 @@ public class GeneralDifficultyHandler : MonoBehaviour
             //If 3 times have passed Assign Position to higher probability
         }
 
+    }
+
+    private float GetEnemyZPos()
+    {
+        if (Random.Range(0, 2) == 0) 
+            return Random.Range(1f,0);
+        return Random.Range(-2f, -3);
     }
 
     // Update is called once per frame
