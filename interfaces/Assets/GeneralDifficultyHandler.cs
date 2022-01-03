@@ -18,11 +18,14 @@ public class GeneralDifficultyHandler : MonoBehaviour
 
     #region Constants
     private const float initialPosBuffer = 20;
-    private const float obstacleOffset = 10;
+    
     private const float obsYPos = -1.66f, obsZPos = -0.97f;
     private const float enemyFrontPos = 9, enemyBackPos = 13;
     private const float endYPos = 5, endZPos = -1;
     #endregion
+
+    [SerializeField]
+    private float obstacleOffset = 10;
 
     private ObstacleDifficultyHandler obsDifficulty;
     private EnemyDifficultyHandler enDifficulty;
@@ -71,7 +74,8 @@ public class GeneralDifficultyHandler : MonoBehaviour
 
         int objNumb = 0;
         int it = 0;
-                     
+                    
+        
         while (obsDifficulty.CurrentEntities < obsDifficulty.MaxNumberOfEntities 
             || enDifficulty.CurrentEntities < enDifficulty.MaxNumberOfEntities)
         {
@@ -108,16 +112,40 @@ public class GeneralDifficultyHandler : MonoBehaviour
                     closerObsPos = f;
                 }
             }
-              
+
+            Vector3 tempPos = default;
+            int maxIt = 50;
             if (Mathf.Abs(closerObsPos - newPos.x) < obstacleOffset)
             {
-               
-               
+
                 it++;
-                if (it > 20) return;
+               
+                if (it > maxIt) 
+                {
+                    objNumb++;
+                    if (r == ObsType.Obstace)
+                        obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], tempPos);
+                    else if (r == ObsType.Enemy)
+                    {
+
+                        float enemyStartPos = initialPos - Random.Range(20, 31);
+                        Vector3 enPos = new Vector3(enemyStartPos, tempPos.y, tempPos.z);
+                        float t = (-initialPos + tempPos.x) / playerSpeed;
+                        float speed = (-enemyStartPos + tempPos.x) / t;
+
+
+                        GameObject enemy = enDifficulty.AddEntity(enemyPREFAB, enPos, speed);
+                        pMovement.onStart += () =>
+                        {
+                            enemy.GetComponent<EnemyActor>().StartRun();
+                        };
+                    }
+                    obstaclePos.Add(tempPos.x);
+                    return; 
+                }
                 continue;
             }
-           
+
             if (newPos.x - closerObsPos > 0)
             {
                 maxDistance = initialPos + initialPosBuffer;
@@ -127,12 +155,17 @@ public class GeneralDifficultyHandler : MonoBehaviour
                 maxDistance = endPos;
             }
 
+            
+            tempPos = newPos;
+
             //Assign a probabilty mapping the distance from the already placed objects 
             int probalitity = (int)UGYSTO.Remap(newPos.x, closerObsPos, maxDistance,0,100);
             probalitity = Mathf.Abs(probalitity);
             
             //Random Range and see if it can be placed
             int temp = Random.Range(50,101);
+           
+
             if(temp < probalitity)
             {              
                 objNumb++;

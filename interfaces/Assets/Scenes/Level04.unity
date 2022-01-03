@@ -27447,8 +27447,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365dc61f428163e4b8cc6142a8c3ad5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLength: 180
+  levelLength: 220
   player: {fileID: 1568346315}
+  obstacleOffset: 10
   enemyPREFAB: {fileID: 7154802972249126984, guid: 88355daef86dc82418e4728a86557ffb, type: 3}
   endPREFAB: {fileID: 1884964834519690596, guid: 743e0be560a816048bf5ef84161412ec, type: 3}
   obstaclesPREFAB:
@@ -27470,8 +27471,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartingLevel: 0
   easy: 3
-  medium: 4
-  hard: 5
+  medium: 2
+  hard: 3
   numberOfEnemies: []
   currentEntities: 0
 --- !u!114 &1506199202
@@ -27486,9 +27487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3e2ab177f321f4ea4966e08566aeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easy: 4
-  medium: 5
-  hard: 6
+  easy: 2
+  medium: 3
+  hard: 4
   currentEntities: 0
 --- !u!4 &1506199203
 Transform:

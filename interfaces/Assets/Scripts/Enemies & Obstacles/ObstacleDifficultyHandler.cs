@@ -5,11 +5,11 @@ using UnityEngine;
 public class ObstacleDifficultyHandler : MonoBehaviour
 {
     [Header("Number of Obstacles")]
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(0, 30)]
     private int easy = 1;
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(0, 30)]
     private int medium = 1;
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(0, 30)]
     private int hard = 1;
 
     private ObstacleActor[] numberOfObstacles;

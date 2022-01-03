@@ -7,11 +7,11 @@ public class EnemyDifficultyHandler : MonoBehaviour
     [SerializeField]
     private bool isStartingLevel = false;
     [Header("Number of Enemies")]
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(0, 30)]
     private int easy = 1;
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(0, 30)]
     private int medium = 1;
-    [SerializeField, Range(1, 30)]
+    [SerializeField, Range(0, 30)]
     private int hard = 1;
 
     [SerializeField]
