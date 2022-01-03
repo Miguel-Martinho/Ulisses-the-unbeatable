@@ -12,7 +12,7 @@ public class EnemyActor : DamageActor
     private GameObject hurtbox, upwardsHitbox;
 
     [SerializeField]
-    private int   speed;
+    private float speed;
     [SerializeField]
     private float attackBuildup, attackCooldown, attackDuration;
     private WaitForSeconds concreteAttackBuildup, concreteAttackCooldown, concreteAttackDuration;
@@ -22,7 +22,17 @@ public class EnemyActor : DamageActor
     private bool reachedPlayer;
     [SerializeField]
     private bool canAttack;
+    
     private bool isDead;
+
+    public float Speed { get => speed; set => speed = value; }
+
+    private bool canRun;
+    public void StartRun()
+    {
+        canRun = true;
+    }
+
     private void Awake()
     {
         Health = baseHealth;
@@ -45,6 +55,7 @@ public class EnemyActor : DamageActor
 
     private void FixedUpdate()
     {
+        if (!canRun) return;
         if (isDead) return;
 
         gameObject.GetComponent<Animator>().SetTrigger("Running");
@@ -91,7 +102,7 @@ public class EnemyActor : DamageActor
         //Destroy(gameObject);
     }
 
-        IEnumerator AttackCooldown()
+    IEnumerator AttackCooldown()
     {
         yield return concreteAttackBuildup;
 

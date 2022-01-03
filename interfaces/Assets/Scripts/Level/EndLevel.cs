@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,5 +42,13 @@ public class EndLevel : MonoBehaviour
         Time.timeScale = 0;
         pI?.SwitchCurrentActionMap("Interface");
         deathScreen.SetActive(true);
+    }
+    
+
+    //Isto é feio
+    internal void init(GameObject gameOverPanel, GameObject endLevelPanel)
+    {
+        levelEnd = endLevelPanel;
+        deathScreen = gameOverPanel;
     }
 }

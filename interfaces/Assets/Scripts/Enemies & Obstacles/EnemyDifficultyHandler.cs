@@ -16,8 +16,13 @@ public class EnemyDifficultyHandler : MonoBehaviour
 
     [SerializeField]
     private EnemyActor[] numberOfEnemies;
+    public int MaxNumberOfEntities => (OptionsManager.instance.EnemyAndObstacles == Difficulty.Easy ? easy :
+                OptionsManager.instance.EnemyAndObstacles == Difficulty.Medium ? medium : hard);
 
+    public int CurrentEntities { get => currentEntities; set => currentEntities = value; }
 
+    [SerializeField]
+    private int currentEntities;
 
     private void Awake()
     {
@@ -30,10 +35,18 @@ public class EnemyDifficultyHandler : MonoBehaviour
         if (isStartingLevel)
             gameObject.SetActive(false);
     }
+    public GameObject AddEntity(GameObject obs, Vector3 position, float speed)
+    {
+        GameObject enemy = Instantiate(obs, position, Quaternion.identity, transform);
+        enemy.GetComponent<EnemyActor>().Speed = speed;
+        CurrentEntities++;
+        return enemy;
+    }
+
 
     private void Modifier()
     {
-
+        return;
         int i = numberOfEnemies.Length - 1;
 
         try

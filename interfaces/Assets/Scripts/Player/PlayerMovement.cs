@@ -34,7 +34,10 @@ public class PlayerMovement : MonoBehaviour
 
     private WaitForSeconds seconds;
 
+    public System.Action onStart;
+
     public bool CanRun { get; set; }
+    private bool locker;
 
     private void Awake()
     {
@@ -45,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         pI.Jump += Jump;
         pI.Punch += Punch;
         seconds = new WaitForSeconds(punchTime);
+
+        locker = true;
 
         if (startButton == null)
         {
@@ -58,6 +63,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CanRun)
         {
+            //Do this one time. I know its not good but im tired
+            if (locker)
+            {
+                onStart?.Invoke();
+                locker = false;
+            }
+
             Vector2 vel = rB.velocity;
             vel.x = walkingVelocity;
 
