@@ -100,7 +100,8 @@ public class GeneralDifficultyHandler : MonoBehaviour
             //Select Next Obstacle Pos
             Vector3 newPos = new Vector3(Random.Range(initialPos + initialPosBuffer, endPos), obsYPos, obsZPos);
             
-         
+                     
+
             float maxDistance = 0;
             //float closerObsPos = obstaclePos.(x => Mathf.Abs(x - newPos.x));
 
@@ -113,7 +114,7 @@ public class GeneralDifficultyHandler : MonoBehaviour
                 }
             }
 
-            Vector3 tempPos = default;
+            Vector3 tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
             int maxIt = 50;
             if (Mathf.Abs(closerObsPos - newPos.x) < obstacleOffset)
             {
@@ -155,8 +156,8 @@ public class GeneralDifficultyHandler : MonoBehaviour
                 maxDistance = endPos;
             }
 
-            
-            tempPos = newPos;
+
+            tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
 
             //Assign a probabilty mapping the distance from the already placed objects 
             int probalitity = (int)UGYSTO.Remap(newPos.x, closerObsPos, maxDistance,0,100);
