@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2781612202356596056}
-  - component: {fileID: 2781612202356596071}
+  - component: {fileID: 4335748662020804284}
   m_Layer: 11
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -31,8 +31,8 @@ Transform:
   m_Father: {fileID: 2382682320953227723}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2781612202356596071
-BoxCollider2D:
+--- !u!58 &4335748662020804284
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44,19 +44,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13348433, y: -0.0017199218}
-  m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.11467748, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.3862126, y: 0.99521166}
-  m_EdgeRadius: 0
+  m_Radius: 0.6146774
 --- !u!1 &3052081958800941937
 GameObject:
   m_ObjectHideFlags: 0
