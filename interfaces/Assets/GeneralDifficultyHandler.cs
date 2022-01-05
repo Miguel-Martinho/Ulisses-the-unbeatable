@@ -6,7 +6,11 @@ using System.Linq;
 public class GeneralDifficultyHandler : MonoBehaviour
 {
     [SerializeField]
-    private float levelLength;
+    private float levelLength_EASY;
+    [SerializeField]
+    private float levelLength_MEDIUM;
+    [SerializeField]
+    private float levelLength_HARD;
 
     [SerializeField]
     private GameObject player;
@@ -14,7 +18,9 @@ public class GeneralDifficultyHandler : MonoBehaviour
     private float playerSpeed;
 
     private float initialPos => player.transform.position.x;
-    private float endPos => initialPos + levelLength;
+    private float endPos => (OptionsManager.instance.EnemyAndObstacles == Difficulty.Easy ? initialPos + levelLength_EASY :
+                OptionsManager.instance.EnemyAndObstacles == Difficulty.Medium ? 
+        initialPos + levelLength_MEDIUM :  initialPos + levelLength_HARD);
 
     #region Constants
     private const float initialPosBuffer = 20;
@@ -65,9 +71,9 @@ public class GeneralDifficultyHandler : MonoBehaviour
         //end.init(gameOverPanel, endLevelPanel);
 
         //Randomly select First Obstacle Type From Possible Types
-        
 
 
+    
         
 
         int iteration =0;
@@ -76,7 +82,7 @@ public class GeneralDifficultyHandler : MonoBehaviour
         while (obsDifficulty.CurrentEntities != obsDifficulty.MaxNumberOfEntities ||
             enDifficulty.CurrentEntities != enDifficulty.MaxNumberOfEntities)
         {
-
+            //Debug.Log("it: " + iteration);
             foreach (Transform g in transform)
             {
                 Destroy(g.gameObject);
@@ -94,7 +100,7 @@ public class GeneralDifficultyHandler : MonoBehaviour
             enDifficulty.CurrentEntities = 0;
 
             iteration++;
-            Debug.Log(iteration);
+
             while (obsDifficulty.CurrentEntities < obsDifficulty.MaxNumberOfEntities
                 || enDifficulty.CurrentEntities < enDifficulty.MaxNumberOfEntities)
             {
@@ -133,39 +139,24 @@ public class GeneralDifficultyHandler : MonoBehaviour
                     }
                 }
 
-                Vector3 tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
-                int maxIt = 50;
+                
+                int maxIt = 
+                    (enDifficulty.MaxNumberOfEntities + obsDifficulty.MaxNumberOfEntities ) 
+                    * 50;
+
                 if (Mathf.Abs(closerObsPos - newPos.x) < obstacleOffset)
                 {
-
+                    //Debug.Log("i " + iteration);
                     it++;
 
                     if (it > maxIt)
                     {
-                        objNumb++;
-                        if (r == ObsType.Obstace)
-                            obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], tempPos);
-                        else if (r == ObsType.Enemy)
-                        {
-
-                            float enemyStartPos = initialPos - Random.Range(20, 31);
-                            Vector3 enPos = new Vector3(enemyStartPos, tempPos.y, tempPos.z);
-                            float t = (-initialPos + tempPos.x) / playerSpeed;
-                            float speed = (-enemyStartPos + tempPos.x) / t;
-
-
-                            GameObject enemy = enDifficulty.AddEntity(enemyPREFAB, enPos, speed);
-                            pMovement.onStart += () =>
-                            {
-                                enemy.GetComponent<EnemyActor>().StartRun();
-                            };
-                        }
-                        obstaclePos.Add(tempPos.x);
+                        //Debug.Log("WHY" + it);                      
                         break;  
                     }
                     continue;
                 }
-
+                
                 if (newPos.x - closerObsPos > 0)
                 {
                     maxDistance = initialPos + initialPosBuffer;
@@ -176,18 +167,19 @@ public class GeneralDifficultyHandler : MonoBehaviour
                 }
 
 
-                tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
+
 
                 //Assign a probabilty mapping the distance from the already placed objects 
                 int probalitity = (int)UGYSTO.Remap(newPos.x, closerObsPos, maxDistance, 0, 100);
                 probalitity = Mathf.Abs(probalitity);
 
                 //Random Range and see if it can be placed
-                int temp = Random.Range(50, 101);
+                int temp = Random.Range(-100, 101);
 
 
-                if (temp < probalitity)
+                if (temp > probalitity)
                 {
+                    Debug.Log($"SUCCESS Value_ {temp} PROB: {probalitity} // PosToTest: {newPos.x}");
                     objNumb++;
                     if (r == ObsType.Obstace)
                         obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], newPos);
@@ -207,21 +199,27 @@ public class GeneralDifficultyHandler : MonoBehaviour
                         };
                     }
                     obstaclePos.Add(newPos.x);
+                    continue;
                 }
+                Debug.Log($"FAILED Value_ {temp} PROB: {probalitity} // PosToTest: {newPos.x}");
 
+
+                it++;
                 //Continue
                 //Save Higher Probabilty
                 //If 3 times have passed Assign Position to higher probability
             }
 
-            Debug.Log(" " + obsDifficulty.CurrentEntities + " -- "  + obsDifficulty.MaxNumberOfEntities);
-            Debug.Log(" " + enDifficulty.CurrentEntities + " -- " + enDifficulty.MaxNumberOfEntities);
+
+            Debug.Log("Enemies: " + enDifficulty.CurrentEntities + "/" + enDifficulty.MaxNumberOfEntities);
+            Debug.Log("Obstacles: " + obsDifficulty.CurrentEntities + "/" + obsDifficulty.MaxNumberOfEntities);
 
             if (iteration == maxIteration)
             {
                 break;
             }
 
+           
         }
     }
 

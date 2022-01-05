@@ -12091,6 +12091,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level End
       objectReference: {fileID: 0}
+    - target: {fileID: 1884964834519690596, guid: 743e0be560a816048bf5ef84161412ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1884964834519690618, guid: 743e0be560a816048bf5ef84161412ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 230.3
@@ -26609,7 +26613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2217060774476359773, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: sceneToLoad
-      value: Level02
+      value: Level06
       objectReference: {fileID: 0}
     - target: {fileID: 2217060774666438678, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_AnchorMin.y
@@ -27588,7 +27592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365dc61f428163e4b8cc6142a8c3ad5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLength: 220
+  levelLength_EASY: 460
+  levelLength_MEDIUM: 460
+  levelLength_HARD: 460
   player: {fileID: 1568346315}
   obstacleOffset: 10
   enemyPREFAB: {fileID: 7154802972249126984, guid: 88355daef86dc82418e4728a86557ffb, type: 3}

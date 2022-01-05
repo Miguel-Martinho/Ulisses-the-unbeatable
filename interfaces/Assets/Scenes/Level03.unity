@@ -11281,6 +11281,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2217060774476359773, guid: 50269755392b3a44ab41811e4375a603, type: 3}
+      propertyPath: sceneToLoad
+      value: Level03
+      objectReference: {fileID: 0}
     - target: {fileID: 2217060774507296103, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -15961,7 +15965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365dc61f428163e4b8cc6142a8c3ad5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLength: 140
+  levelLength_EASY: 150
+  levelLength_MEDIUM: 150
+  levelLength_HARD: 150
   player: {fileID: 925794494}
   obstacleOffset: 10
   enemyPREFAB: {fileID: 7154802972249126984, guid: 88355daef86dc82418e4728a86557ffb, type: 3}

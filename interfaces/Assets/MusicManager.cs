@@ -15,6 +15,7 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         DontDestroyOnLoad(gameObject);
         if (_instance != null && _instance != this)
         {
