@@ -16100,7 +16100,7 @@ MonoBehaviour:
   isStartingLevel: 0
   easy: 1
   medium: 1
-  hard: 1
+  hard: 2
   numberOfEnemies: []
   currentEntities: 0
 --- !u!114 &1920972109

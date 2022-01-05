@@ -6927,8 +6927,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartingLevel: 0
   easy: 4
-  medium: 4
-  hard: 4
+  medium: 6
+  hard: 9
   numberOfEnemies: []
   currentEntities: 0
 --- !u!114 &394141205
@@ -6943,9 +6943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3e2ab177f321f4ea4966e08566aeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easy: 6
+  easy: 4
   medium: 5
-  hard: 6
+  hard: 10
   currentEntities: 0
 --- !u!4 &394141206
 Transform:
