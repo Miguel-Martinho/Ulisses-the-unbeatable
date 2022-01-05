@@ -11118,7 +11118,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 184211423503411909, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 184211423503411915, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_IsActive
@@ -11222,7 +11222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2217060774666438678, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2217060774828049308, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_IsActive
@@ -11511,6 +11511,10 @@ PrefabInstance:
     - target: {fileID: 6866876202717134457, guid: 50269755392b3a44ab41811e4375a603, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420076013097811270, guid: 50269755392b3a44ab41811e4375a603, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50269755392b3a44ab41811e4375a603, type: 3}
@@ -15820,11 +15824,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365dc61f428163e4b8cc6142a8c3ad5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLength_EASY: 210
-  levelLength_MEDIUM: 210
-  levelLength_HARD: 210
+  levelLength_EASY: 120
+  levelLength_MEDIUM: 120
+  levelLength_HARD: 120
   player: {fileID: 925794494}
-  obstacleOffset: 10
+  obstacleOffset: 15
   enemyPREFAB: {fileID: 7154802972249126984, guid: 88355daef86dc82418e4728a86557ffb, type: 3}
   endPREFAB: {fileID: 1884964834519690596, guid: 743e0be560a816048bf5ef84161412ec, type: 3}
   obstaclesPREFAB:
@@ -15844,7 +15848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStartingLevel: 0
-  easy: 3
+  easy: 2
   medium: 3
   hard: 4
   numberOfEnemies: []
