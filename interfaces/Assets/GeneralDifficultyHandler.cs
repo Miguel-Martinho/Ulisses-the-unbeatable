@@ -67,72 +67,137 @@ public class GeneralDifficultyHandler : MonoBehaviour
         //Randomly select First Obstacle Type From Possible Types
         
 
-        //Randomly select First Obstacle Pos
-        Vector3 pos = new Vector3(Random.Range(initialPos + initialPosBuffer, endPos), obsYPos, obsZPos);
-        obsDifficulty.AddEntity(obstaclesPREFAB[0], pos);
-        obstaclePos.Add(pos.x);
 
-        int objNumb = 0;
-        int it = 0;
-                    
         
-        while (obsDifficulty.CurrentEntities < obsDifficulty.MaxNumberOfEntities 
-            || enDifficulty.CurrentEntities < enDifficulty.MaxNumberOfEntities)
+
+        int iteration =0;
+        int maxIteration = 100;
+
+        while (obsDifficulty.CurrentEntities != obsDifficulty.MaxNumberOfEntities ||
+            enDifficulty.CurrentEntities != enDifficulty.MaxNumberOfEntities)
         {
 
-            ObsType r = (ObsType)1;
-            //Select Next Obstacle Type 
-            //0 Obj - 1 Enemy
-            if (obsDifficulty.CurrentEntities >= obsDifficulty.MaxNumberOfEntities)
+            foreach (Transform g in transform)
             {
-                r = (ObsType)0;
+                Destroy(g.gameObject);
             }
-            else if (enDifficulty.CurrentEntities >= enDifficulty.MaxNumberOfEntities)
+            obstaclePos.Clear();
+
+            //Randomly select First Obstacle Pos
+            Vector3 pos = new Vector3(Random.Range(initialPos + initialPosBuffer, endPos), obsYPos, obsZPos);
+            obsDifficulty.AddEntity(obstaclesPREFAB[0], pos);
+            obstaclePos.Add(pos.x);
+
+            int objNumb = 0;
+            int it = 0;
+            obsDifficulty.CurrentEntities = 0;
+            enDifficulty.CurrentEntities = 0;
+
+            iteration++;
+            Debug.Log(iteration);
+            while (obsDifficulty.CurrentEntities < obsDifficulty.MaxNumberOfEntities
+                || enDifficulty.CurrentEntities < enDifficulty.MaxNumberOfEntities)
             {
-                r = (ObsType)1;
-            }
-            else     
-            {
-                r = (ObsType)Random.Range(0, 2);
-            }
 
-
-            //Select Next Obstacle Pos
-            Vector3 newPos = new Vector3(Random.Range(initialPos + initialPosBuffer, endPos), obsYPos, obsZPos);
-            
-                     
-
-            float maxDistance = 0;
-            //float closerObsPos = obstaclePos.(x => Mathf.Abs(x - newPos.x));
-
-            float closerObsPos = 999;
-            foreach (float f in obstaclePos)
-            {
-                if(Mathf.Abs(closerObsPos - newPos.x) > Mathf.Abs(f - newPos.x))
+                ObsType r = (ObsType)1;
+                //Select Next Obstacle Type 
+                //0 Obj - 1 Enemy
+                if (obsDifficulty.CurrentEntities >= obsDifficulty.MaxNumberOfEntities)
                 {
-                    closerObsPos = f;
+                    r = (ObsType)0;
                 }
-            }
+                else if (enDifficulty.CurrentEntities >= enDifficulty.MaxNumberOfEntities)
+                {
+                    r = (ObsType)1;
+                }
+                else
+                {
+                    r = (ObsType)Random.Range(0, 2);
+                }
 
-            Vector3 tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
-            int maxIt = 50;
-            if (Mathf.Abs(closerObsPos - newPos.x) < obstacleOffset)
-            {
 
-                it++;
-               
-                if (it > maxIt) 
+                //Select Next Obstacle Pos
+                Vector3 newPos = new Vector3(Random.Range(initialPos + initialPosBuffer, endPos), obsYPos, obsZPos);
+
+
+
+                float maxDistance = 0;
+                //float closerObsPos = obstaclePos.(x => Mathf.Abs(x - newPos.x));
+
+                float closerObsPos = 999;
+                foreach (float f in obstaclePos)
+                {
+                    if (Mathf.Abs(closerObsPos - newPos.x) > Mathf.Abs(f - newPos.x))
+                    {
+                        closerObsPos = f;
+                    }
+                }
+
+                Vector3 tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
+                int maxIt = 50;
+                if (Mathf.Abs(closerObsPos - newPos.x) < obstacleOffset)
+                {
+
+                    it++;
+
+                    if (it > maxIt)
+                    {
+                        objNumb++;
+                        if (r == ObsType.Obstace)
+                            obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], tempPos);
+                        else if (r == ObsType.Enemy)
+                        {
+
+                            float enemyStartPos = initialPos - Random.Range(20, 31);
+                            Vector3 enPos = new Vector3(enemyStartPos, tempPos.y, tempPos.z);
+                            float t = (-initialPos + tempPos.x) / playerSpeed;
+                            float speed = (-enemyStartPos + tempPos.x) / t;
+
+
+                            GameObject enemy = enDifficulty.AddEntity(enemyPREFAB, enPos, speed);
+                            pMovement.onStart += () =>
+                            {
+                                enemy.GetComponent<EnemyActor>().StartRun();
+                            };
+                        }
+                        obstaclePos.Add(tempPos.x);
+                        break;  
+                    }
+                    continue;
+                }
+
+                if (newPos.x - closerObsPos > 0)
+                {
+                    maxDistance = initialPos + initialPosBuffer;
+                }
+                else
+                {
+                    maxDistance = endPos;
+                }
+
+
+                tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
+
+                //Assign a probabilty mapping the distance from the already placed objects 
+                int probalitity = (int)UGYSTO.Remap(newPos.x, closerObsPos, maxDistance, 0, 100);
+                probalitity = Mathf.Abs(probalitity);
+
+                //Random Range and see if it can be placed
+                int temp = Random.Range(50, 101);
+
+
+                if (temp < probalitity)
                 {
                     objNumb++;
                     if (r == ObsType.Obstace)
-                        obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], tempPos);
+                        obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], newPos);
                     else if (r == ObsType.Enemy)
                     {
 
                         float enemyStartPos = initialPos - Random.Range(20, 31);
-                        Vector3 enPos = new Vector3(enemyStartPos, tempPos.y, tempPos.z);
-                        float t = (-initialPos + tempPos.x) / playerSpeed;
-                        float speed = (-enemyStartPos + tempPos.x) / t;
+                        Vector3 enPos = new Vector3(enemyStartPos, newPos.y, GetEnemyZPos());
+                        float t = (-initialPos + newPos.x) / playerSpeed;
+                        float speed = (-enemyStartPos + newPos.x) / t;
 
 
                         GameObject enemy = enDifficulty.AddEntity(enemyPREFAB, enPos, speed);
@@ -141,59 +206,23 @@ public class GeneralDifficultyHandler : MonoBehaviour
                             enemy.GetComponent<EnemyActor>().StartRun();
                         };
                     }
-                    obstaclePos.Add(tempPos.x);
-                    return; 
+                    obstaclePos.Add(newPos.x);
                 }
-                continue;
+
+                //Continue
+                //Save Higher Probabilty
+                //If 3 times have passed Assign Position to higher probability
             }
 
-            if (newPos.x - closerObsPos > 0)
+            Debug.Log(" " + obsDifficulty.CurrentEntities + " -- "  + obsDifficulty.MaxNumberOfEntities);
+            Debug.Log(" " + enDifficulty.CurrentEntities + " -- " + enDifficulty.MaxNumberOfEntities);
+
+            if (iteration == maxIteration)
             {
-                maxDistance = initialPos + initialPosBuffer;
-            }
-            else
-            {
-                maxDistance = endPos;
+                break;
             }
 
-
-            tempPos = new Vector3(newPos.x, obsYPos, obsZPos);
-
-            //Assign a probabilty mapping the distance from the already placed objects 
-            int probalitity = (int)UGYSTO.Remap(newPos.x, closerObsPos, maxDistance,0,100);
-            probalitity = Mathf.Abs(probalitity);
-            
-            //Random Range and see if it can be placed
-            int temp = Random.Range(50,101);
-           
-
-            if(temp < probalitity)
-            {              
-                objNumb++;
-                if (r == ObsType.Obstace)
-                    obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0,obstaclesPREFAB.Length)], newPos);
-                else if (r == ObsType.Enemy) {
-
-                    float enemyStartPos = initialPos - Random.Range(20,31);
-                    Vector3 enPos = new Vector3(enemyStartPos, newPos.y, GetEnemyZPos());
-                    float t = (-initialPos + newPos.x) / playerSpeed;
-                    float speed = (-enemyStartPos + newPos.x) / t;
-
-
-                    GameObject enemy = enDifficulty.AddEntity(enemyPREFAB, enPos, speed);
-                    pMovement.onStart += () => 
-                    { 
-                        enemy.GetComponent<EnemyActor>().StartRun(); 
-                    };
-                }
-                obstaclePos.Add(newPos.x);
-            }
-
-            //Continue
-            //Save Higher Probabilty
-            //If 3 times have passed Assign Position to higher probability
         }
-
     }
 
     private float GetEnemyZPos()
