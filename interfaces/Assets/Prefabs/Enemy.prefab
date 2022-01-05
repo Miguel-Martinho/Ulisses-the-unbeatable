@@ -2918,8 +2918,8 @@ MonoBehaviour:
   hurtbox: {fileID: 7154802971508189245}
   upwardsHitbox: {fileID: 7154802971956984503}
   speed: 12
-  attackBuildup: 0.2
-  attackCooldown: 2
+  attackBuildup: 0.5
+  attackCooldown: 1.5
   attackDuration: 1
   attackFromUpwards: 1
   canAttack: 1

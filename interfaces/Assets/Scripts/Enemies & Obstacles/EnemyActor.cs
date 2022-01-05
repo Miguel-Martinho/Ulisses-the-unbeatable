@@ -102,8 +102,12 @@ public class EnemyActor : DamageActor
         //Destroy(gameObject);
     }
 
+    
+
     IEnumerator AttackCooldown()
     {
+        
+
         yield return concreteAttackBuildup;
 
         if (attackFromUpwards && playerRb.velocity.y > 0)
