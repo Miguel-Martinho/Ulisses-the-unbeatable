@@ -89,15 +89,18 @@ public class GeneralDifficultyHandler : MonoBehaviour
             }
             obstaclePos.Clear();
 
+            obsDifficulty.CurrentEntities = 0;
+            enDifficulty.CurrentEntities = 0;
+
+            int objNumb = 0;
+            int it = 0;
+
             //Randomly select First Obstacle Pos
             Vector3 pos = new Vector3(Random.Range(initialPos + initialPosBuffer, endPos), obsYPos, obsZPos);
             obsDifficulty.AddEntity(obstaclesPREFAB[0], pos);
             obstaclePos.Add(pos.x);
 
-            int objNumb = 0;
-            int it = 0;
-            obsDifficulty.CurrentEntities = 0;
-            enDifficulty.CurrentEntities = 0;
+            
 
             iteration++;
 
@@ -179,7 +182,7 @@ public class GeneralDifficultyHandler : MonoBehaviour
 
                 if (temp > probalitity)
                 {
-                    Debug.Log($"SUCCESS Value_ {temp} PROB: {probalitity} // PosToTest: {newPos.x}");
+                    //Debug.Log($"SUCCESS Value_ {temp} PROB: {probalitity} // PosToTest: {newPos.x}");
                     objNumb++;
                     if (r == ObsType.Obstace)
                         obsDifficulty.AddEntity(obstaclesPREFAB[Random.Range(0, obstaclesPREFAB.Length)], newPos);
@@ -201,7 +204,7 @@ public class GeneralDifficultyHandler : MonoBehaviour
                     obstaclePos.Add(newPos.x);
                     continue;
                 }
-                Debug.Log($"FAILED Value_ {temp} PROB: {probalitity} // PosToTest: {newPos.x}");
+                //Debug.Log($"FAILED Value_ {temp} PROB: {probalitity} // PosToTest: {newPos.x}");
 
 
                 it++;
@@ -211,8 +214,8 @@ public class GeneralDifficultyHandler : MonoBehaviour
             }
 
 
-            Debug.Log("Enemies: " + enDifficulty.CurrentEntities + "/" + enDifficulty.MaxNumberOfEntities);
-            Debug.Log("Obstacles: " + obsDifficulty.CurrentEntities + "/" + obsDifficulty.MaxNumberOfEntities);
+            //Debug.Log("Enemies: " + enDifficulty.CurrentEntities + "/" + enDifficulty.MaxNumberOfEntities);
+            //Debug.Log("Obstacles: " + obsDifficulty.CurrentEntities + "/" + obsDifficulty.MaxNumberOfEntities);
 
             if (iteration == maxIteration)
             {
