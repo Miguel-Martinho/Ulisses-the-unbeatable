@@ -198,7 +198,8 @@ public class GeneralDifficultyHandler : MonoBehaviour
                         GameObject enemy = enDifficulty.AddEntity(enemyPREFAB, enPos, speed);
                         pMovement.onStart += () =>
                         {
-                            enemy.GetComponent<EnemyActor>().StartRun();
+                            if(enemy != null)
+                                enemy.GetComponent<EnemyActor>().StartRun();
                         };
                     }
                     obstaclePos.Add(newPos.x);

@@ -20,11 +20,13 @@ public class ButtonInfo : MonoBehaviour
 
     public void Selected()
     {
+        //Debug.Log("selected");
         anim.SetBool("selected", true);
     }
 
     public void Deselected()
     {
+        //Debug.Log("deselected");
         anim.SetBool("selected", false);
     }
 

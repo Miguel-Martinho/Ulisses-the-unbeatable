@@ -9,6 +9,8 @@ public class StartLevel : MonoBehaviour
     [SerializeField]
     private GameObject camera, enemies, player;
     private PlayerInput pI;
+    [SerializeField]
+    private GameObject mainMenu;
 
     private void Awake()
     {       
@@ -25,5 +27,6 @@ public class StartLevel : MonoBehaviour
         pI?.SwitchCurrentActionMap("Player");
         player.GetComponent<PlayerMovement>().CanRun = true;
         player.GetComponent<Animator>().SetTrigger("Running");
+        mainMenu.SetActive(false);
     }
 }
